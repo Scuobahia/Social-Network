@@ -1,7 +1,7 @@
 const { User, Thought } = require('../models');
 
 const thoughtController = {
-
+// Get all thoughts
     getAllThoughts(req, res) {
         Thought.find({})
             .populate({
@@ -15,7 +15,7 @@ const thoughtController = {
                 res.sendStatus(400)
             })
     },
-
+// Find by ID
     getThoughtbyId({ params }, res) {
         Thought.findOne({ _id: params.id })
             .populate({
@@ -29,7 +29,7 @@ const thoughtController = {
                 res.sendStatus(400)
             })
     },
-
+// Create New Thought
     createThought({ body }, res) {
         Thought.create(body)
             .then(({ _id }) => {
@@ -42,6 +42,7 @@ const thoughtController = {
             .then(dbThoughtData => res.json(dbThoughtData))
             .catch(err => res.json(err))
     },
+    // Update Thought
     updateThought({ params, body }, res) {
         Thought.findOneAndUpdate({ _id: params.id}, body, { new: true, runValidators: true  })
             .then(dbThoughtData => {
