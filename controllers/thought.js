@@ -54,5 +54,18 @@ const thoughtController = {
             })
             .catch(err => res.status(400).json(err))
     },
-   deleteThought
+    // Delete a thought by ID
+   removeThought({params}, res) {
+       Thought.findOneAndDelete({ _id:params.id})
+       .then(dbThoughtData => res.json({ message: 'This thought has been deleted!'}))
+       .catch(err => res.status(400).json(err));
+   },
+//    Delete a reaction
+removeReaction({params}, res) {
+    Thought.findOneAndUpdate(
+        { _id: params.id},
+    )
+    .then(dbThoughtData => res.json(err))
+    .catch(err => res.json(err));
+}
 };
