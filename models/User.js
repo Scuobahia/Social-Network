@@ -4,25 +4,27 @@ const dateFormat = require('../utils/dateFormat');
 const UserSchema = new Schema(
     {
         username: {
-            type:
-                unique:
-            required:
-                trim:
+            type: String,
+            unique: true,
+            required: 'Username required!',
+            trim: true
         },
         email: {
-            type:
-                unique:
-            required:
+            type: String,
+            unique: true,
+            required: true
 
         },
-        thoughts: {
-            type:
-                ref:
-        },
+        thoughts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Thought'
+            }
+        ],
         friends: [
             {
-                type:
-                    ref:
+                type: Schema.Types.ObjectId,
+                ref: 'Thought'
             }
         ]
     },
