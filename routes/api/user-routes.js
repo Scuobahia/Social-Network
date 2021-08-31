@@ -3,12 +3,15 @@ const {
     getAllUsers,
     getUserById,
     createUser,
+    updateUser,
+    deleteUser,
+    
 } = require('../../controllers/user');
 
 router
-.router('/')
+.route('/')
 .get(getAllUsers)
-.post(addUser)
+.post(createUser)
 
 router
 .route('/:id')
