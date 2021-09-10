@@ -27,7 +27,7 @@ const userController = {
     // Create User
     createUser({ body }, res) {
         User.create(body)
-            .then(dbUserData => res, json(dbUserData))
+            .then(dbUserData => res.json(dbUserData))
             .catch(err => res.json(err));
     },
     // Update by ID
