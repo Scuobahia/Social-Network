@@ -7,12 +7,14 @@ const ReactionSchema = new Schema({
         default: () => new Types.ObjectId()
     },
     reactionBody: {
-        type: String
+        type: String,
+        required: true,
+        maxlenght:200
     },
     username: {
-        type: Date,
-        default: Date.now,
-        get: (createdAtVal) => dateFormat(createdAtVal)
+        type: String,
+        required: true
+       
     },
     createdAt: {
         type: Date,
@@ -26,29 +28,27 @@ const ReactionSchema = new Schema({
             getters: true
         }
     }
-)
+);
 const ThoughtSchema = new Schema(
     {
         thoughtText: {
             type: String,
             required: true,
-            validate: {
-                minlenght: 1,
-                maxlenght: 200
-            }
+            minlenght: 1,
+            maxlenght: 200
         },
         createdAt: {
             type: Date,
             default: Date.now,
             get: createdAtVal => dateFormat(createdAtVal)
         },
-        username: [
+        username: 
             {
-                type:Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        ],
-    },
+                type:String,
+                required: true
+            },
+            reactions: [ReactionSchema]
+        },
     {
         toJSON: {
             virtuals: true,
@@ -58,7 +58,7 @@ const ThoughtSchema = new Schema(
     }
 );
 ThoughtSchema.virtual('reactionCount').get(function(){
-    return this.reactions.length
+    return this.reactions.length;
 });
 
 // create the Tought model using the ThoughtSchema
